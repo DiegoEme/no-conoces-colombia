@@ -2,6 +2,31 @@
   text-align: center;
 }
 
+svg {
+  max-height: 90vh;
+  margin: auto;
+}
+
+svg path {
+  fill: #999;
+  stroke: #eee;
+  stroke-width: 1;
+}
+
+svg path:hover {
+  fill: #367;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.selected {
+  fill: #f62;
+}
+
+#COL1342 {
+  transform: scale(10);
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
