@@ -8,8 +8,8 @@ export const initialStates = [
   "Boyacá",
   "Caldas",
   "Caquetá",
-  "Casanare",
   "Cauca",
+  "Casanare",
   "Cesar",
   "Chocó",
   "Córdoba",
@@ -29,7 +29,7 @@ export const initialStates = [
   "Santander",
   "Sucre",
   "Tolima",
-  "Valle",
+  "Valle del Cauca",
   "Vaupés",
   "Vichada",
 ];
