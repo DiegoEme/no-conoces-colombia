@@ -3,8 +3,8 @@
 }
 
 svg {
-  max-height: 90vh;
   margin: auto;
+  max-height: 90vh;
 }
 
 svg path {
@@ -20,7 +20,11 @@ svg path:hover {
 }
 
 .selected {
-  fill: #f62;
+  fill: #392;
+}
+
+.selected-wrong {
+  fill: rgb(238, 65, 34);
 }
 
 #COL1342 {
