@@ -1,7 +1,14 @@
 .App {
   text-align: center;
 }
+h1 {
+  color: antiquewhite;
+}
 
+h2 {
+  color: #e38c24;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
 svg {
   margin: auto;
   max-height: 90vh;
@@ -10,7 +17,7 @@ svg {
 svg path {
   fill: #999;
   stroke: #eee;
-  stroke-width: 1;
+  stroke-width: 2;
 }
 
 svg path:hover {
@@ -29,6 +36,7 @@ svg path:hover {
 
 #COL1342 {
   transform: scale(10);
+  stroke-width: 0.3;
 }
 
 .App-logo {
