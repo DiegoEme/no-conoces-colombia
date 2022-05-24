@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { initialStates } from "./utils/utils";
+import MyStopwatch from "./components/MyStopWatch";
 import "./App.css";
 
 function App() {
+  const [timeoutId, setTimeoutId] = useState();
   const [selectedWrong, setSelectedWrong] = useState(false);
   const [states, setStates] = useState(initialStates);
   const [correctGuess, setCorrectGuess] = useState([]);
@@ -15,36 +17,42 @@ function App() {
     const stateClicked = e.target.attributes[2].value;
     setSelectedState(stateClicked);
 
-    console.log(stateClicked);
     //Did de user guess the state?
     if (stateClicked === stateToGuess) {
-      console.log(`si ${stateClicked} = ${stateToGuess}!`);
+      //Remove the state from the initialStates
       const list = states;
       const newList = list.filter((state) => state != stateClicked);
       setStates(newList);
+      updatestateToGuess();
       setCorrectGuess([...correctGuess, stateClicked]);
 
       //Pick a new CountryToGuess
-      const lista = states;
-      setStateToGuess(() => {
-        return lista[Math.floor(Math.random() * lista.length)];
-      });
     } else {
-      const lista = states;
-      //
       setSelectedWrong(true);
 
-      setTimeout(() => {
-        setSelectedWrong(false);
-        setStateToGuess(() => {
-          return lista[Math.floor(Math.random() * lista.length)];
-        });
-      }, 1000);
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+
+      setTimeoutId(
+        setTimeout(() => {
+          setSelectedWrong(false);
+          updatestateToGuess();
+        }, 1200)
+      );
+
+      console.log(timeoutId);
     }
   };
 
-  //End game
+  const updatestateToGuess = () => {
+    const list = states;
+    setStateToGuess(() => {
+      return list[Math.floor(Math.random() * list.length)];
+    });
+  };
 
+  //End game
   const endGame = () => {
     window.alert("You won!!!");
   };
@@ -60,6 +68,7 @@ function App() {
       <h1>NO CONOCES COLOMBIA</h1>
 
       <h2>{stateToGuess}</h2>
+
       <svg
         id="map"
         baseProfile="tiny"
@@ -669,6 +678,7 @@ function App() {
         <circle cx="524.8" cy="663.2" id="1"></circle>
         <circle cx="437.3" cy="870.9" id="2"></circle>
       </svg>
+      <MyStopwatch />
     </div>
   );
 }
