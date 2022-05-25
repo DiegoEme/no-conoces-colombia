@@ -21,9 +21,11 @@ function App() {
     if (stateClicked === stateToGuess) {
       //Remove the state from the initialStates
       const list = states;
-      const newList = list.filter((state) => state != stateClicked);
+      const newList = list.filter((state) => state !== stateClicked);
       setStates(newList);
-      updatestateToGuess();
+
+      //updatestateToGuess();
+
       setCorrectGuess([...correctGuess, stateClicked]);
 
       //Pick a new CountryToGuess
@@ -40,22 +42,33 @@ function App() {
           updatestateToGuess();
         }, 1200)
       );
-
-      console.log(timeoutId);
     }
   };
 
   const updatestateToGuess = () => {
     const list = states;
-    setStateToGuess(() => {
-      return list[Math.floor(Math.random() * list.length)];
+
+    setStateToGuess((prevStateToGuess) => {
+      let newStateToGuess = list[Math.floor(Math.random() * list.length)];
+
+      while (list.length > 1 && newStateToGuess === prevStateToGuess) {
+        newStateToGuess = list[Math.floor(Math.random() * list.length)];
+      }
+
+      return newStateToGuess;
     });
   };
 
   //End game
   const endGame = () => {
-    window.alert("You won!!!");
+    setTimeout(() => {
+      window.alert("You won!!!");
+    }, 200);
   };
+
+  useEffect(() => {
+    updatestateToGuess();
+  }, [states]);
 
   useEffect(() => {
     if (states.length < 1) {
