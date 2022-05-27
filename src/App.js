@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
 import { initialStates } from "./utils/utils";
 import MyStopwatch from "./components/MyStopWatch";
+import Home from "./components/Home";
 import "./App.css";
 
 function App() {
+  const [openModal, setOpenModal] = useState(true);
+  const [currentTime, setCurrentTime] = useState([0, 0]);
   const [timeoutId, setTimeoutId] = useState();
   const [selectedWrong, setSelectedWrong] = useState(false);
   const [states, setStates] = useState(initialStates);
@@ -59,10 +62,17 @@ function App() {
     });
   };
 
+  console.log(
+    `total time: ${currentTime[0]} minutes and ${currentTime[1]} seconds`
+  );
+
   //End game
   const endGame = () => {
     setTimeout(() => {
-      window.alert("You won!!!");
+      window.alert(
+        `Yo won!!! total time: ${currentTime[0]} minutes and ${currentTime[1]} seconds`
+      );
+      console.log(currentTime);
     }, 200);
   };
 
@@ -78,9 +88,10 @@ function App() {
 
   return (
     <div className="App">
+      {openModal && <Home closeModal={setOpenModal} />}
       <h1>NO CONOCES COLOMBIA</h1>
 
-      <h2>{stateToGuess}</h2>
+      <h2>{openModal ? "" : stateToGuess}</h2>
 
       <svg
         id="map"
@@ -94,6 +105,7 @@ function App() {
         viewBox="180 60 820 1130"
         xmlns="http://www.w3.org/2000/svg"
         onClick={handleOnClick}
+        className={selectedWrong ? "disable-click" : null}
       >
         <path
           d="M10.5 640.1l0.2 0.9-0.6 0.5-0.4 0-0.8 0.7-0.4 0.1-0.3-0.3 0.5-0.8 0.5-0.3 0-0.6 0.4-0.2 0.9 0z"
@@ -691,7 +703,7 @@ function App() {
         <circle cx="524.8" cy="663.2" id="1"></circle>
         <circle cx="437.3" cy="870.9" id="2"></circle>
       </svg>
-      <MyStopwatch />
+      <MyStopwatch isOpenModal={openModal} setCurrentTime={setCurrentTime} />
     </div>
   );
 }

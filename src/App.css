@@ -34,6 +34,10 @@ svg path:hover {
   fill: rgb(238, 65, 34);
 }
 
+.disable-click {
+  pointer-events: none;
+}
+
 #COL1342 {
   transform: scale(10);
   stroke-width: 0.3;

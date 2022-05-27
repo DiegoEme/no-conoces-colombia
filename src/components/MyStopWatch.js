@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Timer from "./Timer";
 import ControlButtons from "./ControlButtons";
 
-function MyStopwatch() {
+function MyStopwatch({ isOpenModal, setCurrentTime }) {
   const [isActive, setIsActive] = useState(false);
   const [isPaused, setIsPaused] = useState(true);
   const [time, setTime] = useState(0);
+  //detectar cuando pase a false y empezar el contador
 
-  React.useEffect(() => {
+  useEffect(() => {
     let interval = null;
 
     if (isActive && isPaused === false) {
@@ -21,6 +22,12 @@ function MyStopwatch() {
       clearInterval(interval);
     };
   }, [isActive, isPaused]);
+
+  useEffect(() => {
+    if (!isOpenModal) {
+      handleStart();
+    }
+  }, [isOpenModal]);
 
   const handleStart = () => {
     setIsActive(true);
@@ -38,14 +45,14 @@ function MyStopwatch() {
 
   return (
     <div className="stop-watch">
-      <Timer time={time} />
-      <ControlButtons
+      <Timer time={time} setCurrentTime={setCurrentTime} />
+      {/* <ControlButtons
         active={isActive}
         isPaused={isPaused}
         handleStart={handleStart}
         handlePauseResume={handlePauseResume}
         handleReset={handleReset}
-      />
+      /> */}
     </div>
   );
 }
