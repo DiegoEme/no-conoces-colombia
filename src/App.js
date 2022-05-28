@@ -5,6 +5,7 @@ import Home from "./components/Home";
 import "./App.css";
 
 function App() {
+  const [isGameOver, setIsGameOver] = useState(false);
   const [openModal, setOpenModal] = useState(true);
   const [currentTime, setCurrentTime] = useState([0, 0]);
   const [timeoutId, setTimeoutId] = useState();
@@ -62,15 +63,22 @@ function App() {
     });
   };
 
-  console.log(
-    `total time: ${currentTime[0]} minutes and ${currentTime[1]} seconds`
-  );
-
   //End game
   const endGame = () => {
+    setIsGameOver(true);
     setTimeout(() => {
+      let minutes;
+
+      if (currentTime[0] < 1) {
+        minutes = "";
+      } else if (currentTime[0] === 1) {
+        minutes = "1 minuto y";
+      } else {
+        minutes = `${currentTime[0]} minutos y`;
+      }
+
       window.alert(
-        `Yo won!!! total time: ${currentTime[0]} minutes and ${currentTime[1]} seconds`
+        `Ganaste! tiempo total: ${minutes} ${currentTime[1]} segundos`
       );
       console.log(currentTime);
     }, 200);
@@ -703,7 +711,12 @@ function App() {
         <circle cx="524.8" cy="663.2" id="1"></circle>
         <circle cx="437.3" cy="870.9" id="2"></circle>
       </svg>
-      <MyStopwatch isOpenModal={openModal} setCurrentTime={setCurrentTime} />
+
+      <MyStopwatch
+        isOpenModal={openModal}
+        setCurrentTime={setCurrentTime}
+        isGameOver={isGameOver}
+      />
     </div>
   );
 }

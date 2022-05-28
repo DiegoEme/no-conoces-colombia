@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Timer from "./Timer";
-import ControlButtons from "./ControlButtons";
+//import ControlButtons from "./ControlButtons";
 
-function MyStopwatch({ isOpenModal, setCurrentTime }) {
+function MyStopwatch({ isOpenModal, setCurrentTime, isGameOver }) {
   const [isActive, setIsActive] = useState(false);
   const [isPaused, setIsPaused] = useState(true);
   const [time, setTime] = useState(0);
@@ -24,6 +24,12 @@ function MyStopwatch({ isOpenModal, setCurrentTime }) {
   }, [isActive, isPaused]);
 
   useEffect(() => {
+    if (isGameOver) {
+      handlePauseResume();
+    }
+  }, [isGameOver]);
+
+  useEffect(() => {
     if (!isOpenModal) {
       handleStart();
     }
@@ -38,10 +44,10 @@ function MyStopwatch({ isOpenModal, setCurrentTime }) {
     setIsPaused(!isPaused);
   };
 
-  const handleReset = () => {
+  /* const handleReset = () => {
     setIsActive(false);
     setTime(0);
-  };
+  }; */
 
   return (
     <div className="stop-watch">

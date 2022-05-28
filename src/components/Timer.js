@@ -6,23 +6,13 @@ export default function Timer({ time, setCurrentTime }) {
 
   useEffect(() => {
     setMinutes(() => {
-      return `0${Math.floor((time / 60000) % 60)
-        .toString()
-        .slice(-2)}`;
+      return Math.floor((time / 60000) % 60);
     });
-  }, [time]);
-
-  useEffect(() => {
     setSeconds(() => {
-      return `0${Math.floor((time / 1000) % 60)
-        .toString()
-        .slice(-2)}`;
+      return Math.floor((time / 1000) % 60);
     });
-  }, [time]);
-
-  useEffect(() => {
     setCurrentTime([minutes, seconds]);
-  }, [time]);
+  }, [time, minutes, seconds]);
 
   return (
     <div className="timer">
