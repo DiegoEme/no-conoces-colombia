@@ -21,6 +21,7 @@ function App() {
 
   const handleOnClick = (e) => {
     const stateClicked = e.target.attributes[2].value;
+    if (stateClicked === "#7c7c7c") return;
     setSelectedState(stateClicked);
 
     //Did de user guess the state?

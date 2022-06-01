@@ -1,8 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import Confetti from "react-confetti";
 import "./Home.css";
 
 function Home({ closeModal, isGameOver, currentTime }) {
   const [endMessage, setEndMessage] = useState("");
+  const [height, setHeight] = useState(null);
+  const [width, setWidth] = useState(null);
+  const confettiRef = useRef(null);
+
+  useEffect(() => {
+    setHeight(confettiRef.current.clientHeight);
+    setWidth(confettiRef.current.clientWidth);
+  }, []);
 
   let minutes;
   useEffect(() => {
@@ -18,7 +27,7 @@ function Home({ closeModal, isGameOver, currentTime }) {
   }, [currentTime]);
 
   return (
-    <div className="background">
+    <div className="background" ref={confettiRef}>
       <h1 style={{ position: "absolute", top: 0 }}>NO CONOCES COLOMBIA</h1>
       <div className="container">
         <div>
@@ -29,6 +38,14 @@ function Home({ closeModal, isGameOver, currentTime }) {
               <button onClick={() => window.location.reload()}>
                 VOLVER A JUGAR
               </button>
+              <div>
+                <Confetti
+                  recycle={false}
+                  numberOfPieces={200}
+                  width={width}
+                  height={height}
+                />
+              </div>
             </>
           ) : (
             <>
@@ -37,7 +54,7 @@ function Home({ closeModal, isGameOver, currentTime }) {
                 nombre.
               </p>
               <br />
-              <p>¡Entre más rápido mejor!</p>
+              <p>¡Cuanto más rápido mejor!</p>
 
               <button onClick={() => closeModal(false)}>JUGAR</button>
             </>
