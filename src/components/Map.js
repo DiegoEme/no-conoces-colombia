@@ -1,4 +1,5 @@
 import "../App.css";
+import flag from "../colombia.png";
 
 function Map({
   openModal,
@@ -10,7 +11,21 @@ function Map({
 }) {
   return (
     <div>
-      <h1>NO CONOCES COLOMBIA</h1>
+      <h1>
+        <img
+          alt="colombia"
+          style={{ verticalAlign: "middle" }}
+          src={flag}
+          width={30}
+        />{" "}
+        NO CONOCES COLOMBIA{" "}
+        <img
+          alt="colombia"
+          style={{ verticalAlign: "middle" }}
+          width={30}
+          src={flag}
+        />
+      </h1>
 
       <h2>{openModal ? "" : stateToGuess}</h2>
 

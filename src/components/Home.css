@@ -12,7 +12,7 @@
 }
 
 .container {
-  max-width: 500px;
+  max-width: 550px;
   font-size: 25px;
   font-weight: 700;
   display: flex;
@@ -22,7 +22,7 @@
 }
 
 button {
-  margin-top: 80px;
+  margin-top: 50px;
   width: 250px;
   background: #fbca1f;
   font-family: inherit;
@@ -35,11 +35,18 @@ button {
 }
 
 button:hover {
-  transform: translate(-0.05em, -0.05em);
+  transform: translate(-0.07em, -0.07em);
   box-shadow: 0.15em 0.15em;
+  cursor: pointer;
 }
 
 button:active {
   transform: translate(0.05em, 0.05em);
   box-shadow: 0.05em 0.05em;
+}
+
+@media (max-width: 400px) {
+  .container {
+    font-size: 20px;
+  }
 }
