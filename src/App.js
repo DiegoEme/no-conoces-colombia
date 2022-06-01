@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+
 import { initialStates } from "./utils/utils";
 import MyStopwatch from "./components/MyStopWatch";
 import Home from "./components/Home";
@@ -64,21 +65,8 @@ function App() {
   const endGame = () => {
     setIsGameOver(true);
     setTimeout(() => {
-      let minutes;
-
-      if (currentTime[0] < 1) {
-        minutes = "";
-      } else if (currentTime[0] === 1) {
-        minutes = "1 minuto y";
-      } else {
-        minutes = `${currentTime[0]} minutos y`;
-      }
-
-      window.alert(
-        `Ganaste! tiempo total: ${minutes} ${currentTime[1]} segundos`
-      );
-      console.log(currentTime);
-    }, 200);
+      setOpenModal(true);
+    }, 500);
   };
 
   useEffect(() => {
@@ -93,7 +81,13 @@ function App() {
 
   return (
     <div className="App">
-      {openModal && <Home closeModal={setOpenModal} />}
+      {openModal && (
+        <Home
+          closeModal={setOpenModal}
+          isGameOver={isGameOver}
+          currentTime={currentTime}
+        />
+      )}
       <Map
         openModal={openModal}
         stateToGuess={stateToGuess}

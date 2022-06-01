@@ -1,3 +1,5 @@
+//export const initialStates = ["Amazonas", "Antioquia", "Arauca"];
+
 export const initialStates = [
   "Amazonas",
   "Antioquia",
